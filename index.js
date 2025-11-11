@@ -60,7 +60,7 @@ controller.hears('hello', 'direct_message,direct_mention,mention', function(bot,
 
 // give the bot something to listen for.
 controller.hears('help', 'direct_message,direct_mention,mention', function(bot, message) {
-    bot.reply(message, 'Hello! I will expand any Cordova JIRA links in the form of CB-XXXX. Invite me to a channel, mention me in a message, or directly message me to see it in action.');
+    bot.reply(message, 'Hello! I will expand any Cordova Jira links in the form of CB-XXXX. Invite me to a channel, mention me in a message, or directly message me to see it in action.');
 });
 
 
@@ -123,7 +123,7 @@ controller.hears('CB-[0-9]+', ['direct_message', 'direct_mention', 'mention', 'a
                     var link = util.format('<https://issues.apache.org/jira/browse/%s|%s>', val.key, val.key);
                     return util.format('[%s, (%s, %s)] %s', link, val.status, val.resolution, val.summary);
                 } else {
-                    return util.format('[%s] %s', val.key, '*error: issue key not found in JIRA*')
+                    return util.format('[%s] %s', val.key, '*error: issue key not found in Jira*')
                 }
             });
             bot.reply(message, {
@@ -136,5 +136,5 @@ controller.hears('CB-[0-9]+', ['direct_message', 'direct_mention', 'mention', 'a
     }
 });
 
-// JIRA REST API, here "orientation" is being searched for. paged at 5, starting at 0. only showing link and summary fields
+// Jira REST API, here "orientation" is being searched for. paged at 5, starting at 0. only showing link and summary fields
 // https://issues.apache.org/jira/rest/api/2/search?jql=(summary%20~%20%22orientation%22%20OR%20description%20~%20%22orientation%22%20OR%20comment%20~%20%22orientation%22)%20AND%20project%20%3D%20CB%20AND%20resolution%20%3D%20Unresolved%20ORDER%20BY%20created&startAt=0&maxResults=5&fields=link,summary
